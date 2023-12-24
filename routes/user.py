@@ -127,7 +127,7 @@ def get_user_data(current_user: UserToken):
                 detail=f"Невалидные данные: {e}",
                 headers={"WWW-Authenticate": "Bearer"},
             )
-    
+
         
     try:
         user_profile = UserProfile.objects.get(id=decoded_token_user_id)
