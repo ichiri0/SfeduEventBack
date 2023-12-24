@@ -34,6 +34,19 @@ ALLOWED_HOSTS = [
 ]
 
 
+CSRF_TRUST_ORIGINS = [
+    'dog-central-thoroughly.ngrok-free.app'
+]
+
+CSRF_TRUST_ALL = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://dog-central-thoroughly.ngrok-free.app",
+    # Другие доверенные домены
+]
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -92,22 +105,21 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    # },
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
 
 # SECRET_KEY = "AHDAISDOASOIHDAOSDOIAIOSOHDIAOIWDHPIOSEFPIOOPIAFPIOEPOHF"
-
 
 
 # Internationalization
