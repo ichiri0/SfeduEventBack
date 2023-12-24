@@ -130,18 +130,39 @@ class UserProfile(models.Model):
         return f"{self.user.username} {self.user.email} {self.user.first_name} {self.user.last_name} {self.role.name}"
 
 
+class EventCategory(models.Model):
+    name = models.CharField(max_length=300, blank=False,
+                            null=False, verbose_name="Наименование")
+    
+    color_hex = models.CharField(max_length=10, blank=False,
+                            null=False, verbose_name="HEX цвета")
+
+    class Meta:
+        verbose_name = "Категория Мероприятия"
+        verbose_name_plural = "Категории Мероприятий"
+
+    def __str__(self):
+        return self.name
+
+
 class Event(models.Model):
     organizator = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    event_category = models.ForeignKey(EventCategory, on_delete=models.CASCADE)
     name = models.CharField(max_length=300, blank=False,
                             null=False, verbose_name="Наименование")
     description = models.TextField(
         blank=True, null=True, verbose_name="Описание")
-    latitude = models.FloatField(null=True, blank=True, verbose_name="Широта")
-    longitude = models.FloatField(
-        null=True, blank=True, verbose_name="Долгота")
+    address = models.CharField(max_length=300, blank=False,
+                              null=False, verbose_name="Адрес", default="Таганрог, ул. Чехова, д1")
+    # latitude = models.FloatField(null=True, blank=True, verbose_name="Широта")
+    # longitude = models.FloatField(
+    #     null=True, blank=True, verbose_name="Долгота")
 
-    datetime_of_event = models.DateTimeField(
-        verbose_name="Дата и время проведения", null=True, blank=True)
+    datetime_start = models.DateTimeField(
+        verbose_name="Дата и время начала", null=True, blank=True)
+    
+    datetime_end = models.DateTimeField(
+        verbose_name="Дата и время конца", null=True, blank=True)
 
     image = models.ImageField(
         verbose_name="Фото", upload_to='events/', null=True, blank=True, default=None)
